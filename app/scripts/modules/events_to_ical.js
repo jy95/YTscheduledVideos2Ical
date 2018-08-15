@@ -1,4 +1,9 @@
-let vobject = require("vobject");
+import {
+  calendar as vobject_calendar,
+  event as vobject_event,
+  dateTimeValue as vobject_dateTimeValue
+} from "vobject";
+
 
 // https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
 function timestamp2DateTime(timestamp) {
@@ -20,11 +25,11 @@ function descriptionText(item, dateItem) {
 
 // add each item to the calendar
 export default function(eventArray) {
-  let calendar = vobject.calendar();
+  let calendar = vobject_calendar();
   var index = eventArray.length;
   while (index--) {
     // create an event
-    let event = vobject.event();
+    let event = vobject_event();
     let item = eventArray[index];
     let dateTime = timestamp2DateTime(item.time);
 
@@ -35,11 +40,11 @@ export default function(eventArray) {
     // since YT use timestamp , I am forced to make an ugly conversion
 
     // format : YYYY-MM-DDTHH:mm:ssZ (https://github.com/outlook/vobject-js/blob/master/docs/vobject/dateTimeValue.md#dateparsedatetimedatetimestring)
-    let dateTimeValue = vobject.dateTimeValue(dateTime.toISOString());
+    let dateTimeValue = vobject_dateTimeValue(dateTime.toISOString());
     event.setDTStart(dateTimeValue);
 
     // add event to calendar
     calendar.pushComponent(event);
   }
-  return calendar.toICS();
+  return calendar.toICSLines();
 }

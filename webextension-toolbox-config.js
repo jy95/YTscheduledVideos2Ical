@@ -12,7 +12,10 @@ module.exports = {
             jquery: 'jQuery'
         };
 
+        // Handles vobject need to load fs for reading stuff , not needed for web app
+        // config.node = { fs: 'empty' };
+
         // Important: return the modified config
         return config
     }
-}
+};

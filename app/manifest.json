@@ -25,6 +25,6 @@
   },
   "permissions": [
     "downloads",
-    "https://www.youtube.com/my_videos?o=U&vmo=private&sq=is%3Aprivate&pi=*"
+    "https://www.youtube.com/*"
   ]
 }
