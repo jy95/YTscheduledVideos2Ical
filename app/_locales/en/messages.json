@@ -1,0 +1,30 @@
+{
+  "appName": {
+    "message": "YouTube scheduled videos to ical",
+    "description": "The name of the application"
+  },
+  "appShortName": {
+    "message": "YT2Ical",
+    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
+  },
+  "appDescription": {
+    "message": "Extract your scheduled videos publish date to a ical file so that it allows you to to see your scheduling in your favorite calendar app",
+    "description": "The description of the application"
+  },
+  "browserActionTitle": {
+    "message": "YTscheduledVideos2Ical",
+    "description": "The title of the browser action button"
+  },
+  "descriptionItemIcal" : {
+    "message": "This scheduled video",
+    "description": "First part of the description text that will be inserted in each item"
+  },
+  "description2ItemIcal" : {
+    "message": "will be public on : ",
+    "description": "Second part of the description text that will be inserted in each item"
+  },
+  "buttonGenerator": {
+    "message": "Generate file",
+    "description": "Text inside the popup page"
+  }
+}

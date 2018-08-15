@@ -1,0 +1,18 @@
+{
+  "name": "YTscheduledVideos2Ical",
+  "version": "1.0.0",
+  "description": "Extract your scheduled videos publish date to a ical file so that it allows you to to see your scheduling in your favorite calendar app",
+  "scripts": {
+    "dev": "webextension-toolbox dev",
+    "build": "webextension-toolbox build",
+    "chrome-build": "webextension-toolbox build chrome"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.71",
+    "@types/jquery": "^3.3.5",
+    "webextension-toolbox": "latest"
+  },
+  "dependencies": {
+    "vobject": "^0.1.1"
+  }
+}
