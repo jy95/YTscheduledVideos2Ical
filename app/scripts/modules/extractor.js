@@ -1,15 +1,9 @@
 import $ from "jquery";
+import fetchHTML from "./fetchGetAsync";
 
 export default async function(url) {
   try {
-    const resultPage = await $.ajax({
-      dataType: "html",
-      method: "GET",
-      url: url,
-      xhrFields: {
-        withCredentials: true
-      }
-    });
+    const resultPage = await fetchHTML(url);
 
     // find elements
     let childrenNodesForVideoTitle = [

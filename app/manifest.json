@@ -26,6 +26,5 @@
   "permissions": [
     "downloads",
     "https://www.youtube.com/*"
-  ],
-  "content_security_policy": "default-src 'self'; style-src 'self'; script-src 'self'; connect-src https://youtube.com/*; img-src https://youtube.com/*"
+  ]
 }

@@ -12,6 +12,9 @@ export default async function(videos_url, private_videos_url) {
     first_estimation
   );
 
+  console.log("First estimated page index : " + first_estimation);
+  console.log("Final estimated page index : " + final_estimation);
+
   // second, using the estimation, extract data
   let page_indexes_for_scheduled_videos = Array.from(
     new Array(final_estimation),
