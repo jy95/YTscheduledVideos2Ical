@@ -14,7 +14,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log(message.error);
       break;
     case "ICAL_request":
-      build_result(MY_VIDEO_URL, PRIVATE_VIDEO_URL);
+      build_result(MY_VIDEO_URL, PRIVATE_VIDEO_URL).then(function(calendar) {
+        let blob = new Blob(calendar, {
+          type: "text/calendar"
+        });
+        let url = URL.createObjectURL(blob);
+        chrome.downloads.download({
+          url: url, // The object URL can be used as download URL
+          filename: chrome.i18n.getMessage("appShortName") + ".ical" // The filename
+        });
+      });
+
       break;
   }
   return true;

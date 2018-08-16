@@ -28,14 +28,6 @@ export default async function(videos_url, private_videos_url) {
   ).then(array_of_array_of_scheduled_videos =>
     [].concat(...array_of_array_of_scheduled_videos)
   );
-  // TODO build the calendar and then send it for download
-
-  let blob = new Blob([build_calendar(array_of_scheduled_videos)], {
-    type: "text/calendar"
-  });
-  let url = URL.createObjectURL(blob);
-  chrome.downloads.download({
-    url: url, // The object URL can be used as download URL
-    filename: chrome.i18n.getMessage("appShortName") + ".ical" // The filename
-  });
+  // build the calendar and then send it for download
+  return [build_calendar(array_of_scheduled_videos)];
 }
