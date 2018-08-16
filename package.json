@@ -1,6 +1,11 @@
 {
-  "name": "YTscheduledVideos2Ical",
+  "name": "yt_scheduled_videos_2_ical",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jy95/YTscheduledVideos2Ical.git"
+  },
+  "license": "MIT",
   "description": "Extract your scheduled videos publish date to a ical file so that it allows you to to see your scheduling in your favorite calendar app",
   "scripts": {
     "dev": "webextension-toolbox dev",
@@ -13,6 +18,8 @@
     "webextension-toolbox": "latest"
   },
   "dependencies": {
-    "vobject": "^0.1.1"
+    "ical-generator": "^1.0.3",
+    "moment": "^2.22.2",
+    "jquery": "latest"
   }
 }

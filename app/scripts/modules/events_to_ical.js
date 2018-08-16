@@ -1,16 +1,7 @@
-import {
-  calendar as vobject_calendar,
-  event as vobject_event,
-  dateTimeValue as vobject_dateTimeValue
-} from "vobject";
+const ical = require("ical-generator");
+const moment = require("moment");
 
-
-// https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
-function timestamp2DateTime(timestamp) {
-  return new Date(timestamp * 1000).toISOString();
-}
-
-function descriptionText(item, dateItem) {
+function descriptionText(item) {
   return (
     chrome.i18n.getMessage("descriptionItemIcal") +
     " " +
@@ -19,32 +10,25 @@ function descriptionText(item, dateItem) {
     item.url +
     " ) " +
     chrome.i18n.getMessage("description2ItemIcal") +
-    dateItem.toLocaleString()
+    // https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
+    new Date(item.time * 1000).toLocaleString()
   );
 }
 
 // add each item to the calendar
 export default function(eventArray) {
-  let calendar = vobject_calendar();
-  var index = eventArray.length;
-  while (index--) {
-    // create an event
-    let event = vobject_event();
-    let item = eventArray[index];
-    let dateTime = timestamp2DateTime(item.time);
-
-    // set title and description
-    event.setSummary(item.title);
-    event.setDescription(descriptionText(item, dateTime));
-
-    // since YT use timestamp , I am forced to make an ugly conversion
-
-    // format : YYYY-MM-DDTHH:mm:ssZ (https://github.com/outlook/vobject-js/blob/master/docs/vobject/dateTimeValue.md#dateparsedatetimedatetimestring)
-    let dateTimeValue = vobject_dateTimeValue(dateTime.toISOString());
-    event.setDTStart(dateTimeValue);
-
-    // add event to calendar
-    calendar.pushComponent(event);
-  }
-  return calendar.toICSLines();
+  return ical({
+    domain: "youtube.com",
+    name: chrome.i18n.getMessage("appName"),
+    events: eventArray.map(function(item) {
+      let dateItem = moment.unix(item.item);
+      return {
+        title: item.title,
+        description: descriptionText(item),
+        start: dateItem,
+        end: dateItem.add(1, "s"),
+        url: item.url
+      };
+    })
+  }).toString();
 }

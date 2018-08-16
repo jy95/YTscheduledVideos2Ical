@@ -23,6 +23,6 @@ export default async function (private_videos_url, total_count) {
     } catch (e) {
         // Unknown error : maybe network or other
         console.log({ type: "error", error: e });
-        return 0;
+        return 1;
     }
 }

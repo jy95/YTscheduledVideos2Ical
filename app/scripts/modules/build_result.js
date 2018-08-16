@@ -30,7 +30,7 @@ export default async function(videos_url, private_videos_url) {
   );
   // TODO build the calendar and then send it for download
 
-  let blob = new Blob(build_calendar(array_of_scheduled_videos), {
+  let blob = new Blob([build_calendar(array_of_scheduled_videos)], {
     type: "text/calendar"
   });
   let url = URL.createObjectURL(blob);

@@ -8,12 +8,14 @@ module.exports = {
         // Perform customizations to webpack config
 
         // Handles Jquery in a CDN , so that we don't build that again
+        /*
         config.externals = {
             jquery: 'jQuery'
         };
+        */
 
-        // Handles vobject need to load fs for reading stuff , not needed for web app
-        // config.node = { fs: 'empty' };
+        // Handles need to load fs for reading stuff , not needed for web app
+        config.node = { fs: 'empty' };
 
         // Important: return the modified config
         return config
