@@ -22,7 +22,7 @@ export default function(eventArray) {
     events: eventArray.map(function(item) {
       let dateItem = new Date(item.time * 1000);
       return {
-        title: item.title,
+        summary: item.title,
         description: descriptionText(item, dateItem),
         start: dateItem,
         // add 1 seconds since scheduled uploads doesn't take all day to be public
