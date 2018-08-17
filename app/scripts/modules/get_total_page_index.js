@@ -1,5 +1,5 @@
 import $ from "jquery";
-import fetchHTML from "./fetchGetAsync";
+import fetchHTML from "./fetchGetAsyncToDocument";
 
 const MAX_ITEMS_ON_SINGLE_PAGE = 30;
 

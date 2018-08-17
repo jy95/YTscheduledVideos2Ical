@@ -1,46 +1,52 @@
 import $ from "jquery";
-import fetchHTML from "./fetchGetAsync";
+import fetchHTML from "./fetchGetAsyncToDocument";
+
+const LOOKUP_VARIABLE = "VIDEO_LIST_DISPLAY_OBJECT";
 
 export default async function(url) {
   try {
+    console.log(url, " - Extracting scheduled videos");
     const resultPage = await fetchHTML(url);
 
-    // find elements
-    let childrenNodesForVideoTitle = [
-      "div.vm-video-item-content-primary",
-      "div.vm-video-info-container",
-      "div.vm-video-title",
-      "div.vm-video-title-container"
-    ];
-    let list = $(
-      "div.vm-video-side-content-left-container > div.vm-badges > span.vm-scheduled-date.localized-date",
-      $(resultPage)
-    );
+    // manual testing and I find out that videos data are stored here
+    let videoItemsData = $(
+      "script:contains('" + LOOKUP_VARIABLE + "')",
+      resultPage
+    )
+      .first()
+      .text();
+    // If I didn't use a variable to store the match
+    // let regex = /"VIDEO_LIST_DISPLAY_OBJECT":(\[{.*}\])/;
+    let regex = new RegExp('"' + LOOKUP_VARIABLE + '"' + ":(\\[{.*}\\])");
 
-    // collect the scheduled videos metadata
-    return $.map(list, function(item) {
-      // since old Youtube design isn't going to change soon , it should work on it
-      let $videoTitleSelector = childrenNodesForVideoTitle.reduce(
-        (currentSelector, node) => currentSelector.children(node),
-        $(item).closest("div.vm-video-item-content")
-        //.parents().eq(3)
-      );
-      // an useful object for next usage
-      return {
-        title: $videoTitleSelector
-          .children("a")
-          .first()
-          .text(),
-        time: $(item).attr("data-timestamp"),
-        url:
-          "https://www.youtube.com/watch?v=" +
-          $videoTitleSelector
-            .children("a")
-            .first()
-            .attr("href")
-            .replace("/edit?o=U&video_id=", "")
-      };
-    });
+    let json_stringed_result = regex.exec(videoItemsData);
+    if (
+      json_stringed_result !== null &&
+      json_stringed_result[1] !== undefined
+    ) {
+      let result = json_stringed_result[1];
+      console.log(url, " - Found videoItems contents");
+      let videoItems = JSON.parse('{"videosItem":' + result + "}");
+      return videoItems["videosItem"]
+        .map(function(item) {
+          let html = $(item.html);
+          return {
+            url: "https://www.youtube.com/watch?v=" + item.id,
+            time: parseInt(
+              $("span.vm-scheduled-date.localized-date", html).attr(
+                "data-timestamp"
+              ),
+              10
+            ),
+            title: $("a.vm-video-title-content", html).text()
+          };
+          // just to remove not scheduled videos from result (for example the private video)
+        })
+        .filter(item => !isNaN(item.time));
+    } else {
+      // nothing found
+      return [];
+    }
   } catch (e) {
     // Unknown error : maybe network or other
     chrome.runtime.sendMessage({ type: "error", error: e });

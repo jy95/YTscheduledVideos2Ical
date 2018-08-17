@@ -26,11 +26,13 @@ export default async function(videos_url, private_videos_url) {
       let result = await scheduled_videos_extractor(
         private_videos_url + page_index
       );
+      console.log(private_videos_url + page_index, result);
       return result;
     })
   ).then(array_of_array_of_scheduled_videos =>
     [].concat(...array_of_array_of_scheduled_videos)
   );
+  console.log("Data to be sent to ical file : ", array_of_scheduled_videos);
   // build the calendar and then send it for download
   return [build_calendar(array_of_scheduled_videos)];
 }

@@ -1,7 +1,6 @@
 const ical = require("ical-generator");
-const moment = require("moment");
 
-function descriptionText(item) {
+function descriptionText(item, date) {
   return (
     chrome.i18n.getMessage("descriptionItemIcal") +
     " " +
@@ -21,12 +20,13 @@ export default function(eventArray) {
     domain: "youtube.com",
     name: chrome.i18n.getMessage("appName"),
     events: eventArray.map(function(item) {
-      let dateItem = moment.unix(item.item);
+      let dateItem = new Date(item.time * 1000);
       return {
         title: item.title,
-        description: descriptionText(item),
+        description: descriptionText(item, dateItem),
         start: dateItem,
-        end: dateItem.add(1, "s"),
+        // add 1 seconds since scheduled uploads doesn't take all day to be public
+        end: new Date(dateItem.getTime() + 1000),
         url: item.url
       };
     })

@@ -1,5 +1,5 @@
 import $ from "jquery";
-import fetchHTML from "./fetchGetAsync";
+import fetchHTML from "./fetchGetAsyncToDocument";
 
 export default async function(private_videos_url, total_count) {
   try {

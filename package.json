@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "ical-generator": "^1.0.3",
-    "moment": "^2.22.2",
     "jquery": "latest"
   }
 }
