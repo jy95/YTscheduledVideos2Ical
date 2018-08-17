@@ -2,12 +2,10 @@
 // `DOMContentLoaded` event on the document, and adding your listeners to
 // specific elements when it triggers.
 document.addEventListener("DOMContentLoaded", function() {
-  document.querySelector("button").addEventListener("click", clickHandler);
-  let selector = document.querySelector("button");
-  selector.innerHTML = chrome.i18n.getMessage("buttonGenerator");
-  selector.addEventListener("click", clickHandler);
+  document.querySelector("button").addEventListener("click", function() {
+    chrome.runtime.sendMessage({ type: "ICAL_request" });
+  });
+  document.querySelector("button").innerHTML = chrome.i18n.getMessage(
+    "buttonGenerator"
+  );
 });
-
-function clickHandler(/*event*/) {
-  chrome.runtime.sendMessage({ type: "ICAL_request" });
-}
