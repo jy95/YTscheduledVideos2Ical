@@ -8,7 +8,7 @@
     "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
   },
   "appDescription": {
-    "message": "Extract your scheduled videos publish date to a ical file so that it allows you to to see your scheduling in your favorite calendar app",
+    "message": "Extract your scheduled videos publish date to a ical file so that it allows you to to see your scheduling in your calendar app",
     "description": "The description of the application"
   },
   "browserActionTitle": {
