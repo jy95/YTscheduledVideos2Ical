@@ -15,7 +15,7 @@
   "devDependencies": {
     "@types/chrome": "0.0.287",
     "@types/jquery": "^3.5.32",
-    "webextension-toolbox": "latest"
+    "@webextension-toolbox/webextension-toolbox": "latest"
   },
   "dependencies": {
     "ical-generator": "^8.0.1",
