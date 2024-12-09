@@ -22,7 +22,7 @@ jobs:
         run: npm install
       - name: Build website 🤖
         run: |
-          npm run build
+          npm run chrome-build
       - name: Create Pull Request 🤖
         uses: peter-evans/create-pull-request@v7
         with:
