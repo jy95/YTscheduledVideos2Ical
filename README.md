@@ -45,7 +45,7 @@ The build tool also defines a variable named `process.env.NODE_ENV` in your scri
 
 ## Docs
 
-* [webextension-toolbox](https://github.com/HaNdTriX/webextension-toolbox)
+* [@webextension-toolbox/webextension-toolbox](https://github.com/webextension-toolbox/webextension-toolbox)
 
 ## Known Bugs
 
