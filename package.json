@@ -13,7 +13,7 @@
     "chrome-build": "webextension-toolbox build chrome"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.71",
+    "@types/chrome": "0.0.287",
     "@types/jquery": "^3.3.5",
     "webextension-toolbox": "latest"
   },
