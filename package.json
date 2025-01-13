@@ -18,7 +18,7 @@
     "@webextension-toolbox/webextension-toolbox": "latest"
   },
   "dependencies": {
-    "ical-generator": "^8.0.1",
+    "ical-generator": "^8.1.0",
     "jquery": "latest"
   }
 }
