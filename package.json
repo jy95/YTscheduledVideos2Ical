@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@types/chrome": "0.1.37",
-    "@types/jquery": "^3.5.33",
+    "@types/jquery": "^4.0.0",
     "@webextension-toolbox/webextension-toolbox": "latest"
   },
   "dependencies": {
